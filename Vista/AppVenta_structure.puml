@@ -1,0 +1,206 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "POO.proyecto.modeloKFC.Vista.AppVenta",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_984844027 { 
+   	label=proyecto
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_78045305 { 
+   	label=modeloKFC
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   AppVenta2085757622[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AppVenta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ llenarCliente(scanner: Scanner): Cliente</TD></TR>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ mostrarBoleta(cliente: Cliente, empleado: Empleado, pago: Pago, totalVenta: double)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Combo307743424[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Combo</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   descripcion: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   idCombo: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombreCombo: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   precio: double [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DetalleVenta307743424[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DetalleVenta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cantidad: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   combo: Combo [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   idDetalle: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   subtotal: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcularSubTotal(): double</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PagoEfectivo307743424[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PagoEfectivo</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   monto: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ realizarPago()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PagoTarjeta307743424[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PagoTarjeta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   claveSeguridad: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fechaVencimiento: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   monto: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   numeroTarjeta: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   titular: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ realizarPago()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Venta307743424[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Venta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   detalles: List&lt;DetalleVenta&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   estado: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fecha: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   idVenta: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   total: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ agregarDetalle(detalle: DetalleVenta)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+AppVenta2085757622 -> PagoEfectivo307743424[arrowhead=none];
+AppVenta2085757622 -> PagoTarjeta307743424[arrowhead=none];
+AppVenta2085757622 -> Venta307743424[label="main() -> agregarDetalle()"];
+DetalleVenta307743424 -> Combo307743424[label="combo
+[0..1]"];
+Venta307743424 -> DetalleVenta307743424[label="detalles
+[0..*]"];
+    
+}
+@enduml
