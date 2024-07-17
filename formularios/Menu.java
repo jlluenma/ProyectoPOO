@@ -4,12 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Menu extends JDialog {
-    private JButton salirButton;
-    private JButton realizarVentaButton;
+    private JButton salirButton;     //Botón que regresa a Inicio
+    private JButton realizarVentaButton;   //Botón que lleva a la ventana de venta
     private JLabel menuText;
     public JPanel MenuPanel;
 
-    // Modificar el constructor para caeptar un Dialog
     public Menu(Dialog owner) {
         super(owner);
         setTitle("Menú Principal");
@@ -24,10 +23,10 @@ public class Menu extends JDialog {
         setVisible(true);
     }
 
-    private void initComponents() {
+    private void initComponents() {     //Botón Salir
+        //TODO: Regresar a la ventana de Inicio
         salirButton.addActionListener(e -> dispose());
-        // Configurar realizarVentaButton según sea necesario
     }
+
+    //TODO: Configurar el botón que lleve a Venta
 }
-
-
