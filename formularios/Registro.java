@@ -1,55 +1,95 @@
 package formularios;
 
+import Clases.Acceso;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class Registro extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton buttonOK;       //Botón que realiza el registro y manda un mensaje de registro exitoso
+    private JButton buttonCancel;   //Botón que cancela y regresa a Inicio
+    //Datos del usuario
     private JTextField nombres;
     private JTextField email;
     private JTextField phone;
     private JTextField nUsuario;
-    private JPasswordField contraseña;
+    private JPasswordField contra;
     private JPasswordField confimarContra;
+    private Acceso acces;   //Istancia de la clase Acceso
 
-    public Registro(Dialog owner) {
+    public Registro(Window owner) {
 
-        super(owner);
-        setTitle("Menu de Registro");
-        setMinimumSize(new Dimension(500, 500));
+        super(owner, "Menu de Registro", ModalityType.APPLICATION_MODAL);
         setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        setMinimumSize(new Dimension(500, 500));
         setLocationRelativeTo(owner);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        initComponents();
+        getRootPane().setDefaultButton(buttonOK);
         setVisible(true);
+        acces = new Acceso(); //Inicializa la instancia de Acceso
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
-            } //llama al método onOK
+                registrarUsuario(); //Registra el usuario con el método
+            }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {onCancel();} //Llama al método onCancel
+            public void actionPerformed(ActionEvent e) {
+                //TODO: Regresar al Inicio
+                //Inicio inicio = new Inicio();
+                //inicio.setVisible(true);
+                System.out.println("Cancelado");
+                //dispose(); // Cierra el diálogo
+            }
         });
     }
 
-    private void initComponents() {
-        // Configurar realizarVentaButton según sea necesario
+    private void registrarUsuario() {
+        //TODO: Cambiar de nombre del método por similitud con el método de Acceso
+        //Guarda en variables los datos del usuario
+        String nombre =nombres.getText();
+        String correo = email.getText();
+        String telefono = phone.getText();
+        String usuario = nUsuario.getText();
+        String contraseña = new String(contra.getPassword());
+        String confirmarContraseña = new String(confimarContra.getPassword());
+
+        //Verifica que los campos estén llenos
+        if (usuario.isEmpty() || contraseña.isEmpty() || confirmarContraseña.isEmpty() ||
+                nombre.isEmpty() || correo.isEmpty() || telefono.isEmpty()) {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            toolkit.beep();
+            System.out.println("Algún campo está vacío!");
+            return;
+        }else{
+            //Verifica que las constraseñas coincidan
+            if (!contraseña.equals(confirmarContraseña)) {
+                Toolkit toolkit = Toolkit.getDefaultToolkit();
+                toolkit.beep();
+                System.out.println("Las contraseñas no coinciden!");
+                return;
+            }else{
+                // Si está corecto registra al usuario llamando al método y llenando los parámetros correspondientes
+                acces.registrarUsuario(nombre, correo, telefono,contraseña,usuario);
+
+                // En caso el registro falle por otro motivo
+                if (acces.isRegistroFallido()) {
+                    Toolkit toolkit = Toolkit.getDefaultToolkit();
+                    toolkit.beep();
+                    System.out.println("Registro fallido! :(");
+                }
+            }
+        }
     }
 
-    private void onOK() {
-        // Botón que llevará al inicio, insertará los datos en la base de datos y mostrará mensaje de registro exitoso
-        dispose();
-    }
-
-    private void onCancel() {
-        // Botón que llevará al inicio sin realizar ningún registro y llevará al inicio
-        dispose();
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        Registro dialog = new Registro(frame);
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 }
