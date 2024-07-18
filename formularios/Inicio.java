@@ -17,22 +17,22 @@ public class Inicio extends JDialog {
         setTitle("Login");
         setContentPane(loginPanel);
         setMinimumSize(new Dimension(450, 450));
-        setModal(true); //Hace la ventana modal
+        setModal(true); // Hace la ventana modal
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);  //Cierra los recursos al cerrar ventana
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Cierra los recursos al cerrar ventana
 
-        entrarButton.addActionListener(e -> {
-            //TODO: Verificación de Usuario y contraseña para ingresar a Menu.
+        entrarButton.addActionListener(e -> {       //Botón Entrar
+            // TODO: Verificación de Usuario y contraseña para ingresar a Menu.
             Menu menu = new Menu(this);
             menu.setVisible(true);
-            dispose();
+            setVisible(false); // Oculta el Inicio en lugar de cerrarlo
         });
 
         registrarUsuarioButton.addActionListener(e -> {
             // Botón que envía a Registro.java
             Registro registro = new Registro(this);
             registro.setVisible(true);
-            dispose();
+            setVisible(false); // Oculta el Inicio en lugar de cerrarlo
         });
 
         setVisible(true);
